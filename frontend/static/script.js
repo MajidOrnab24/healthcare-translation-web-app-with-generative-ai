@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('translatedTranscript').classList.add('translating');
             document.getElementById('translatedTranscript').textContent = "Translating...";
             
-            const response = await fetch('http://localhost:8000/translate', {
+            const response = await fetch(process.env.API_URL + '/translate', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

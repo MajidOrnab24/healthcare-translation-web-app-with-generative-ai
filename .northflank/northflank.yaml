@@ -1,0 +1,25 @@
+version: "1"
+services:
+  healthcare-backend:
+    type: web-service
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - port: 8000
+        http: /api/*
+    env:
+      - key: OPENROUTER_API_KEY
+        value: your-api-key-here
+
+  healthcare-frontend:
+    type: web-service
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - port: 3000
+        http: /*
+    env:
+      - key: API_URL
+        value: ${HEALTHCARE_BACKEND_URL}  # Auto-linked to backend
