@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Translation Assistant</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Healthcare Translation Assistant</h1>
+        
+        <div class="language-selectors">
+            <div>
+                <label>Input Language:</label>
+                <select id="inputLang"></select>
+            </div>
+            <div>
+                <label>Output Language:</label>
+                <select id="outputLang"></select>
+            </div>
+        </div>
+
+        <div class="transcript-container">
+            <div class="transcript-box">
+                <h3>Original Transcript</h3>
+                <div id="originalTranscript" class="transcript" lang="auto"></div>
+                <button id="speakOriginalButton" class="speak-btn original-speak">🔊 Play Original</button>
+            </div>
+            <div class="transcript-box">
+                <h3>Translated Text</h3>
+                <div id="translatedTranscript" class="transcript" lang="auto"></div>
+                <button id="speakTranslatedButton" class="speak-btn translated-speak">🔊 Play Translation</button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="startBtn" class="mic-btn">🎤 Start Speaking</button>
+            <button id="stopBtn" class="mic-btn" disabled>⏹ Stop</button>
+        </div>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>
