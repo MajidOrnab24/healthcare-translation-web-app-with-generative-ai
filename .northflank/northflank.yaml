@@ -10,7 +10,7 @@ services:
         http: /api/*
     env:
       - key: OPENROUTER_API_KEY
-        value: your-api-key-here
+        value: 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
 
   healthcare-frontend:
     type: web-service
