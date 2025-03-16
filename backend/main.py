@@ -58,9 +58,9 @@ async def translate_text(request: TranslationRequest):
             raise HTTPException(status_code=400, detail="Text too long (max 500 characters)")
 
         headers = {
-            "Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}",
+            "Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}",  # Key from env
             "Content-Type": "application/json"
-        }
+                }
         
         payload = {
             "model": "deepseek/deepseek-chat:free",

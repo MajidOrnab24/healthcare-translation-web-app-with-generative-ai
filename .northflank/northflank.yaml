@@ -7,10 +7,10 @@ services:
       dockerfile: /backend/Dockerfile
     ports:
       - port: 8000
-        http: /api/*
+        http: /api/
     env:
       - key: OPENROUTER_API_KEY
-        value: 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
+        value: ""
 
   healthcare-frontend:
     type: web-service
@@ -19,7 +19,7 @@ services:
       dockerfile: /frontend/Dockerfile
     ports:
       - port: 3000
-        http: /*
+        http: /
     env:
       - key: API_URL
-        value: ${HEALTHCARE_BACKEND_URL}  # Auto-linked to backend
+        value: ${healthcare-backend_URL}  # Auto-linked to backend
