@@ -80,9 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!text.trim() || (now - lastTranslationTime < 1000)) return;
         lastTranslationTime = now;
         
+        
         try {
             document.getElementById('translatedTranscript').classList.add('translating');
             document.getElementById('translatedTranscript').textContent = "Translating...";
+            console.log("Sending request:", {
+                text: text,
+                sourceLang: inputLang.value,
+                targetLang: outputLang.value
+              });
             
             const response = await fetch(process.env.API_URL + '/translate', {
                 method: 'POST',
@@ -93,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     target_lang: outputLang.value
                 })
             });
+            console.log("Raw response:", response);
             
             const data = await response.json();
             const cleanTranslation = data.translation

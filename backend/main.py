@@ -96,3 +96,19 @@ async def translate_text(request: TranslationRequest):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+@app.post("/translate")
+async def translate_text(request: TranslationRequest):
+    logger.info(f"Received request: {request.dict()}")
+    try:
+        # ... existing code ...
+        response = await client.post(...)
+        logger.info(f"OpenRouter response: {response.status_code} {response.text}")
+    except Exception as e:
+        logger.error(f"Critical error: {str(e)}", exc_info=True)
+        raise
