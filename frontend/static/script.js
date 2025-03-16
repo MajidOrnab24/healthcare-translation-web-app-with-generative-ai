@@ -76,44 +76,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Translation handler
     const handleTranslation = async (text) => {
-        const now = Date.now();
-        if (!text.trim() || (now - lastTranslationTime < 1000)) return;
-        lastTranslationTime = now;
-        
-        
         try {
-            document.getElementById('translatedTranscript').classList.add('translating');
-            document.getElementById('translatedTranscript').textContent = "Translating...";
-            console.log("Sending request:", {
-                text: text,
-                sourceLang: inputLang.value,
-                targetLang: outputLang.value
-              });
+            console.log("Starting translation for:", text);
             
-            const response = await fetch(process.env.API_URL + '/translate', {
+            const response = await fetch('https://p01--healthcare-backend--h92ktnf8wd57.code.run/translate', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     text: text,
-                    source_lang: inputLang.value,
-                    target_lang: outputLang.value
+                    source_lang: document.getElementById('inputLang').value,
+                    target_lang: document.getElementById('outputLang').value
                 })
             });
-            console.log("Raw response:", response);
+    
+            console.log("Response status:", response.status);
             
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("API Error:", errorData);
+                throw new Error(errorData.detail || "Translation failed");
+            }
+    
             const data = await response.json();
+            console.log("Raw API response:", data);
+            
             const cleanTranslation = data.translation
-                .replace(/\\?boxed[({]?([^})\n]*)[})]?/gi, '$1')
-                .replace(/[\\{}\]\["“”]/g, '')  // Removes all types of quotes
-                .replace(/^boxed/i, '')
+                .replace(/[\\{}\]\["“”]/g, '')
                 .trim();
                 
             document.getElementById('translatedTranscript').textContent = cleanTranslation;
+    
         } catch (error) {
-            console.error('Translation error:', error);
-            document.getElementById('translatedTranscript').textContent = "⚠️ Translation failed";
-        } finally {
-            document.getElementById('translatedTranscript').classList.remove('translating');
+            console.error("Full error details:", {
+                error: error.message,
+                input: text,
+                sourceLang: document.getElementById('inputLang').value,
+                targetLang: document.getElementById('outputLang').value
+            });
+            document.getElementById('translatedTranscript').textContent = `⚠️ Error: ${error.message}`;
         }
     };
 
