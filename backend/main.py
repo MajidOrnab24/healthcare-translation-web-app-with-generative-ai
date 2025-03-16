@@ -11,7 +11,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://p01--healthcare-frontend--h92ktnf8wd57.code.run",
+        "http://localhost:8001"
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
