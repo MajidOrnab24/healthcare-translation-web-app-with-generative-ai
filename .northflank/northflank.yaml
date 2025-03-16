@@ -3,8 +3,8 @@ services:
   healthcare-backend:
     type: web-service
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: /backend
+      dockerfile: /backend/Dockerfile
     ports:
       - port: 8000
         http: /api/*
@@ -15,8 +15,8 @@ services:
   healthcare-frontend:
     type: web-service
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: /frontend
+      dockerfile: /frontend/Dockerfile
     ports:
       - port: 3000
         http: /*
