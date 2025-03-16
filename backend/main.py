@@ -63,7 +63,7 @@ async def translate_text(request: TranslationRequest):
         }
         
         payload = {
-            "model": "deepseek/deepseek-r1-zero:free",
+            "model": "deepseek/deepseek-chat:free",
             "messages": [
                 {
                 "role": "system",
